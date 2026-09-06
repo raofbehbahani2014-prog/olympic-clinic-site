@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل مدیریت | کلینیک پزشکی ورزشی المپیک</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d2e2b; --field:#123c37; --paper:#f5f2ea; --line:#e2ddcf;
+    --pulse:#ff4d3d; --gold:#c9a24b; --ok:#1f9d55;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:'Vazirmatn',sans-serif; background:var(--paper); color:var(--ink);}
+  header{background:var(--ink); color:#fff; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10;}
+  header b{font-size:15px;}
+  header .sub{font-size:11.5px; color:#a9c2bd;}
+  .logout{background:transparent; border:1px solid rgba(255,255,255,.3); color:#fff; padding:8px 14px; border-radius:100px; font-size:12.5px; cursor:pointer; font-family:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:20px 16px 90px;}
+
+  /* ---- login ---- */
+  #loginScreen{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;}
+  .login-box{background:#fff; border:1px solid var(--line); border-radius:18px; padding:30px 26px; width:100%; max-width:360px;}
+  .login-box h2{margin:0 0 6px; font-size:19px;}
+  .login-box p{margin:0 0 22px; font-size:13px; color:#6b7a76;}
+  label{display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:#33443f;}
+  input, textarea{
+    width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:10px;
+    font-family:inherit; font-size:14px; margin-bottom:14px; background:#fbfaf6;
+  }
+  textarea{resize:vertical; min-height:70px; line-height:1.8;}
+  button.primary{
+    width:100%; background:var(--pulse); color:#fff; border:none; padding:13px; border-radius:10px;
+    font-size:14.5px; font-weight:700; cursor:pointer; font-family:inherit;
+  }
+  .err{color:var(--pulse); font-size:12.5px; margin-bottom:10px; display:none;}
+
+  /* ---- dashboard ---- */
+  #dashboard{display:none;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px; margin-bottom:16px;}
+  .card h3{margin:0 0 16px; font-size:15px; border-bottom:1px solid var(--line); padding-bottom:10px;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:0 12px;}
+  @media(max-width:520px){.row2{grid-template-columns:1fr;}}
+  .svc-title{font-size:13px; font-weight:700; color:var(--pulse); margin-bottom:8px;}
+  .save-bar{
+    position:fixed; bottom:0; inset-inline:0; background:rgba(255,255,255,.97); backdrop-filter:blur(8px);
+    border-top:1px solid var(--line); padding:12px 16px; display:flex; gap:10px; align-items:center; justify-content:center;
+  }
+  .save-bar button{max-width:360px;}
+  .status{font-size:12.5px; margin-inline-start:10px;}
+  .status.ok{color:var(--ok);}
+  .status.bad{color:var(--pulse);}
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="login-box">
+    <h2>ورود به پنل مدیریت</h2>
+    <p>کلینیک پزشکی ورزشی المپیک</p>
+    <div class="err" id="loginErr"></div>
+    <label>نام کاربری</label>
+    <input id="username" type="text" autocomplete="username">
+    <label>رمز عبور</label>
+    <input id="password" type="password" autocomplete="current-password">
+    <button class="primary" onclick="doLogin()">ورود</button>
+  </div>
+</div>
+
+<div id="dashboard">
+  <header>
+    <div>
+      <b>پنل مدیریت سایت</b>
+      <div class="sub">کلینیک پزشکی ورزشی المپیک</div>
+    </div>
+    <button class="logout" onclick="doLogout()">خروج</button>
+  </header>
+
+  <div class="wrap">
+
+    <div class="card">
+      <h3>متن‌های دکمه‌ها و فوتر (در همه صفحه دیده می‌شود)</h3>
+      <div class="row2">
+        <div><label>متن دکمه بالای سایت</label><input id="topCtaText" /></div>
+        <div><label>متن دکمه اصلی (قرمز، در هدر)</label><input id="heroCtaPrimary" /></div>
+      </div>
+      <label>متن دکمه دوم در هدر (مشاهده خدمات)</label>
+      <input id="heroCtaSecondary" />
+      <div class="row2">
+        <div><label>دکمه تماس فوری (نوار پایین موبایل)</label><input id="mobileCtaCall" /></div>
+        <div><label>دکمه آدرس و نوبت (نوار پایین موبایل)</label><input id="mobileCtaMap" /></div>
+      </div>
+      <label>خط اول فوتر</label>
+      <input id="footerText1" />
+      <label>خط دوم فوتر</label>
+      <input id="footerText2" />
+    </div>
+
+    <div class="card">
+      <h3>اطلاعات تماس و کلینیک</h3>
+      <label>شماره تلفن (بدون صفر اول یا با آن، فرقی ندارد)</label>
+      <input id="phone" />
+      <label>شماره تلفن نمایشی (مثلاً 071-00000000)</label>
+      <input id="phoneDisplay" />
+      <label>ایمیل</label>
+      <input id="email" />
+      <label>آدرس</label>
+      <textarea id="address"></textarea>
+      <div class="row2">
+        <div>
+          <label>لینک اینستاگرام</label>
+          <input id="instagram" />
+        </div>
+        <div>
+          <label>لینک تلگرام</label>
+          <input id="telegram" />
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>رزرو آنلاین نوبت</h3>
+      <p style="font-size:12.5px; color:#6b7a76; margin-bottom:14px;">اگر سایت جداگانه‌ای برای رزرو آنلاین نوبت دارید (مثلاً دکتر تو)، لینکش را اینجا بگذارید. یک دکمه طلایی‌رنگ کنار «نوبت‌دهی تلفنی» در بالای سایت ظاهر می‌شود که به این لینک می‌رود. تا وقتی خالی باشد، این دکمه نمایش داده نمی‌شود.</p>
+      <label>لینک سایت رزرو آنلاین</label>
+      <input id="onlineBookingUrl" placeholder="https://www.doctoreto.com/dr/...">
+      <label>متن روی دکمه</label>
+      <input id="onlineBookingText" />
+    </div>
+
+    <div class="card">
+      <h3>ساعات پذیرش</h3>
+      <label>شنبه تا چهارشنبه</label>
+      <input id="hoursSatToWed" />
+      <label>پنجشنبه</label>
+      <input id="hoursThu" />
+      <label>جمعه</label>
+      <input id="hoursFri" />
+    </div>
+
+    <div class="card">
+      <h3>متن بخش اصلی (Hero)</h3>
+      <label>عنوان اصلی - خط اول</label>
+      <input id="heroTitlePart1" />
+      <label>عنوان اصلی - خط دوم (رنگی)</label>
+      <input id="heroTitlePart2" />
+      <label>توضیح زیر عنوان</label>
+      <textarea id="heroLead"></textarea>
+      <div class="row2">
+        <div><label>سال سابقه (مثلاً 15+)</label><input id="statYears" /></div>
+        <div><label>تعداد واحد تخصصی</label><input id="statUnits" /></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>درباره کلینیک — بخش عنوان و متن</h3>
+      <label>عنوان کوچک بالای بخش (مثلاً «درباره کلینیک»)</label>
+      <input id="aboutEyebrow" />
+      <label>عنوان اصلی بخش</label>
+      <input id="aboutHeading" />
+      <label>پاراگراف اول</label>
+      <textarea id="aboutText1"></textarea>
+      <label>پاراگراف دوم</label>
+      <textarea id="aboutText2"></textarea>
+      <div class="row2">
+        <div><label>عدد آمار ۱</label><input id="aboutStat1Num" /><label>برچسب آمار ۱</label><input id="aboutStat1Label" /></div>
+        <div><label>عدد آمار ۲</label><input id="aboutStat2Num" /><label>برچسب آمار ۲</label><input id="aboutStat2Label" /></div>
+      </div>
+      <label>عدد آمار ۳</label>
+      <input id="aboutStat3Num" />
+      <label>برچسب آمار ۳</label>
+      <input id="aboutStat3Label" />
+    </div>
+
+    <div class="card">
+      <h3>درباره کلینیک — کارت دکتر</h3>
+      <label>نام دکتر</label>
+      <input id="doctorName" />
+      <label>حروف اول (داخل دایره کوچک کارت، مثلاً AH)</label>
+      <input id="doctorInitials" />
+      <label>سمت / نقش دکتر</label>
+      <input id="doctorRole" />
+      <label>توضیح کوتاه زیر سمت</label>
+      <textarea id="doctorDesc"></textarea>
+      <label>مدارک و مسئولیت‌ها (لیست تیک‌دار)</label>
+      <input id="cred0" style="margin-bottom:8px;" placeholder="مورد ۱">
+      <input id="cred1" style="margin-bottom:8px;" placeholder="مورد ۲">
+      <input id="cred2" style="margin-bottom:8px;" placeholder="مورد ۳">
+      <input id="cred3" placeholder="مورد ۴">
+    </div>
+
+    <div class="card">
+      <h3>لوگوی کلینیک</h3>
+      <p style="font-size:12.5px; color:#6b7a76; margin-bottom:14px;">یک تصویر لوگو (ترجیحاً مربعی) آپلود کنید تا در هدر و فوتر سایت به‌جای حرف «M» نمایش داده شود.</p>
+      <div id="logoPreviewBox" style="margin-bottom:12px;"></div>
+      <input type="file" id="logoFileInput" accept="image/png,image/jpeg,image/webp,image/svg+xml">
+      <button type="button" onclick="uploadLogo()" style="background:var(--field); color:#fff; border:none; padding:10px 18px; border-radius:8px; font-family:inherit; font-size:13px; cursor:pointer; margin-top:10px;">آپلود و تنظیم به‌عنوان لوگو</button>
+      <span id="logoUploadStatus" style="font-size:12.5px; margin-right:10px;"></span>
+    </div>
+
+    <div class="card" id="servicesCard">
+      <h3>خدمات کلینیک</h3>
+      <label>عنوان کوچک بالای بخش (Eyebrow)</label>
+      <input id="servicesEyebrow" />
+      <label>عنوان اصلی بخش خدمات</label>
+      <input id="servicesHeading" />
+      <label>توضیح زیر عنوان</label>
+      <textarea id="servicesSubheading"></textarea>
+      <p style="font-size:12.5px; color:#6b7a76; margin:14px 0;">هر تعداد خدمت که بخواهید اضافه یا حذف کنید؛ محدودیتی به ۶ یا ۹ مورد وجود ندارد. برای ویرایش عنوان و توضیح هر خدمت، مستقیم در کادرهای زیر تایپ کنید.</p>
+      <div id="servicesList"></div>
+      <button type="button" onclick="addService()" style="background:var(--field); color:#fff; border:none; padding:10px 18px; border-radius:8px; font-family:inherit; font-size:13px; cursor:pointer; margin-top:6px;">+ افزودن خدمت جدید</button>
+    </div>
+
+    <div class="card" id="videosCard">
+      <h3>ویدیوهای معرفی کلینیک</h3>
+      <label>عنوان کوچک بالای بخش (Eyebrow)</label>
+      <input id="videosEyebrow" />
+      <label>عنوان اصلی بخش ویدیوها</label>
+      <input id="videosHeading" />
+      <label>توضیح زیر عنوان</label>
+      <textarea id="videosSubheading"></textarea>
+      <p style="font-size:12.5px; color:#6b7a76; margin:14px 0;">هر تعداد ویدیو که بخواهید اضافه کنید؛ هرکدام عنوان، توضیح کوتاه و لینک (یوتیوب یا آپارات) مخصوص به خودش دارد. تا وقتی هیچ ویدیویی با لینک معتبر ثبت نشده، این بخش روی سایت نمایش داده نمی‌شود.</p>
+      <div id="videosList"></div>
+      <button type="button" onclick="addVideo()" style="background:var(--field); color:#fff; border:none; padding:10px 18px; border-radius:8px; font-family:inherit; font-size:13px; cursor:pointer; margin-top:6px;">+ افزودن ویدیوی جدید</button>
+    </div>
+
+    <div class="card">
+      <h3>مقالات و آموزش</h3>
+      <p style="font-size:12.5px; color:#6b7a76; margin-bottom:14px;">هر مقاله یک عنوان، خلاصه و لینک (اختیاری) به متن کامل دارد. تا وقتی حداقل یک مقاله با عنوان ثبت نشده، این بخش روی سایت نمایش داده نمی‌شود.</p>
+      <div id="articlesList"></div>
+      <button type="button" onclick="addArticle()" style="background:var(--field); color:#fff; border:none; padding:10px 18px; border-radius:8px; font-family:inherit; font-size:13px; cursor:pointer; margin-top:6px;">+ افزودن مقاله جدید</button>
+    </div>
+
+    <div class="card">
+      <h3>نظر مراجعه‌کننده (تستیمونیال)</h3>
+      <label>متن نظر</label>
+      <textarea id="testimonialText"></textarea>
+      <div class="row2">
+        <div><label>نام</label><input id="testimonialName" /></div>
+        <div><label>عنوان/توضیح کوتاه</label><input id="testimonialRole" /></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>نقشه</h3>
+      <label>عبارت جستجوی نقشه (مثلاً: شیراز، خیابان زند)</label>
+      <input id="mapQuery" />
+    </div>
+
+  </div>
+
+  <div class="save-bar">
+    <button class="primary" onclick="saveContent()" style="flex:1; max-width:400px;">ذخیره تغییرات روی سایت</button>
+    <span class="status" id="statusMsg"></span>
+  </div>
+</div>
+
+<script>
+let currentContent = null;
+
+async function checkLogin() {
+  const r = await fetch('/api/me');
+  const d = await r.json();
+  if (d.loggedIn) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadContent();
+  }
+}
+
+async function doLogin() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const errBox = document.getElementById('loginErr');
+  errBox.style.display = 'none';
+  try {
+    const r = await fetch('/api/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username, password})
+    });
+    const d = await r.json();
+    if (r.ok) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      loadContent();
+    } else {
+      errBox.textContent = d.error || 'ورود ناموفق بود.';
+      errBox.style.display = 'block';
+    }
+  } catch (e) {
+    errBox.textContent = 'خطا در ارتباط با سرور.';
+    errBox.style.display = 'block';
+  }
+}
+
+async function doLogout() {
+  await fetch('/api/logout', {method:'POST'});
+  location.reload();
+}
+
+async function loadContent() {
+  const r = await fetch('/api/content');
+  currentContent = await r.json();
+  const simpleFields = [
+    'topCtaText','heroCtaPrimary','heroCtaSecondary','mobileCtaCall','mobileCtaMap','footerText1','footerText2',
+    'phone','phoneDisplay','email','address','instagram','telegram','onlineBookingUrl','onlineBookingText',
+    'hoursSatToWed','hoursThu','hoursFri',
+    'heroTitlePart1','heroTitlePart2','heroLead','statYears','statUnits',
+    'aboutEyebrow','aboutHeading','aboutStat1Num','aboutStat1Label','aboutStat2Num','aboutStat2Label','aboutStat3Num','aboutStat3Label',
+    'doctorName','doctorInitials','doctorRole','doctorDesc','cred0','cred1','cred2','cred3',
+    'aboutText1','aboutText2',
+    'testimonialText','testimonialName','testimonialRole','mapQuery',
+    'servicesEyebrow','servicesHeading','servicesSubheading',
+    'videosEyebrow','videosHeading','videosSubheading'
+  ];
+  simpleFields.forEach(key => {
+    const el = document.getElementById(key);
+    if (el && currentContent[key] !== undefined) el.value = currentContent[key];
+  });
+
+  // لوگو
+  if (currentContent.logoUrl) {
+    document.getElementById('logoPreviewBox').innerHTML =
+      `<img src="${escapeAttr(currentContent.logoUrl)}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:1px solid var(--line);">`;
+  }
+
+  // خدمات
+  renderServices(currentContent.services || []);
+
+  // ویدیوها
+  renderVideos(currentContent.videos || []);
+
+  // مقالات
+  renderArticles(currentContent.articles || []);
+}
+
+let serviceCount = 0;
+function renderServices(services) {
+  const list = document.getElementById('servicesList');
+  list.innerHTML = '';
+  serviceCount = 0;
+  services.forEach(s => addService(s));
+  if (services.length === 0) addService();
+}
+
+function addService(data) {
+  const i = serviceCount++;
+  const list = document.getElementById('servicesList');
+  const box = document.createElement('div');
+  box.id = 'serviceBox' + i;
+  box.style.cssText = 'border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; position:relative;';
+  box.innerHTML = `
+    <div class="svc-title">خدمت ${i + 1}</div>
+    <label>عنوان خدمت</label>
+    <input id="svcTitle${i}" value="${escapeHtml(data && data.title || '')}">
+    <label>توضیح</label>
+    <textarea id="svcDesc${i}">${escapeHtml(data && data.desc || '')}</textarea>
+    <button type="button" onclick="document.getElementById('serviceBox${i}').remove()" style="background:transparent; color:var(--pulse); border:1px solid var(--pulse); padding:6px 14px; border-radius:8px; font-family:inherit; font-size:12px; cursor:pointer; margin-top:4px;">حذف این خدمت</button>
+  `;
+  list.appendChild(box);
+}
+
+let videoCount = 0;
+function renderVideos(videos) {
+  const list = document.getElementById('videosList');
+  list.innerHTML = '';
+  videoCount = 0;
+  videos.forEach(v => addVideo(v));
+  if (videos.length === 0) addVideo();
+}
+
+function addVideo(data) {
+  const i = videoCount++;
+  const list = document.getElementById('videosList');
+  const box = document.createElement('div');
+  box.id = 'videoBox' + i;
+  box.style.cssText = 'border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; position:relative;';
+  box.innerHTML = `
+    <div class="svc-title">ویدیو ${i + 1}</div>
+    <label>عنوان ویدیو</label>
+    <input id="vidTitle${i}" value="${escapeHtml(data && data.title || '')}">
+    <label>توضیح کوتاه</label>
+    <textarea id="vidDesc${i}">${escapeHtml(data && data.desc || '')}</textarea>
+    <label>لینک ویدیو (یوتیوب یا آپارات)</label>
+    <input id="vidUrl${i}" value="${escapeHtml(data && data.url || '')}" placeholder="https://www.youtube.com/watch?v=...">
+    <button type="button" onclick="document.getElementById('videoBox${i}').remove()" style="background:transparent; color:var(--pulse); border:1px solid var(--pulse); padding:6px 14px; border-radius:8px; font-family:inherit; font-size:12px; cursor:pointer; margin-top:4px;">حذف این ویدیو</button>
+  `;
+  list.appendChild(box);
+}
+
+async function uploadLogo() {
+  const input = document.getElementById('logoFileInput');
+  const status = document.getElementById('logoUploadStatus');
+  if (!input.files || !input.files[0]) { status.textContent = 'اول یک فایل انتخاب کنید.'; status.className = 'status bad'; return; }
+  status.textContent = 'در حال آپلود...'; status.className = 'status';
+  const formData = new FormData();
+  formData.append('image', input.files[0]);
+  try {
+    const r = await fetch('/api/upload', { method: 'POST', body: formData });
+    const d = await r.json();
+    if (r.ok) {
+      currentContent.logoUrl = d.url;
+      document.getElementById('logoPreviewBox').innerHTML =
+        `<img src="${escapeAttr(d.url)}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:1px solid var(--line);">`;
+      status.textContent = '✓ آپلود شد. برای اعمال روی سایت، «ذخیره تغییرات» را بزنید.';
+      status.className = 'status ok';
+    } else {
+      status.textContent = d.error || 'خطا در آپلود'; status.className = 'status bad';
+    }
+  } catch (e) {
+    status.textContent = 'خطا در ارتباط با سرور'; status.className = 'status bad';
+  }
+}
+
+let articleCount = 0;
+function renderArticles(articles) {
+  const list = document.getElementById('articlesList');
+  list.innerHTML = '';
+  articleCount = 0;
+  articles.forEach(a => addArticle(a));
+  if (articles.length === 0) addArticle(); // حداقل یک ردیف خالی برای شروع نمایش داده شود
+}
+
+function addArticle(data) {
+  const i = articleCount++;
+  const list = document.getElementById('articlesList');
+  const box = document.createElement('div');
+  box.id = 'articleBox' + i;
+  box.style.cssText = 'border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; position:relative;';
+  box.innerHTML = `
+    <div class="svc-title">مقاله ${i + 1}</div>
+    <label>عنوان مقاله</label>
+    <input id="artTitle${i}" value="${escapeHtml(data && data.title || '')}">
+    <label>خلاصه مقاله</label>
+    <textarea id="artSummary${i}">${escapeHtml(data && data.summary || '')}</textarea>
+    <label>لینک متن کامل (اختیاری)</label>
+    <input id="artLink${i}" value="${escapeHtml(data && data.link || '')}" placeholder="https://...">
+    <button type="button" onclick="document.getElementById('articleBox${i}').remove()" style="background:transparent; color:var(--pulse); border:1px solid var(--pulse); padding:6px 14px; border-radius:8px; font-family:inherit; font-size:12px; cursor:pointer; margin-top:4px;">حذف این مقاله</button>
+  `;
+  list.appendChild(box);
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/"/g, '&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+async function saveContent() {
+  const statusMsg = document.getElementById('statusMsg');
+  statusMsg.textContent = 'در حال ذخیره...';
+  statusMsg.className = 'status';
+
+  const simpleFields = [
+    'topCtaText','heroCtaPrimary','heroCtaSecondary','mobileCtaCall','mobileCtaMap','footerText1','footerText2',
+    'phone','phoneDisplay','email','address','instagram','telegram','onlineBookingUrl','onlineBookingText',
+    'hoursSatToWed','hoursThu','hoursFri',
+    'heroTitlePart1','heroTitlePart2','heroLead','statYears','statUnits',
+    'aboutEyebrow','aboutHeading','aboutStat1Num','aboutStat1Label','aboutStat2Num','aboutStat2Label','aboutStat3Num','aboutStat3Label',
+    'doctorName','doctorInitials','doctorRole','doctorDesc','cred0','cred1','cred2','cred3',
+    'aboutText1','aboutText2',
+    'testimonialText','testimonialName','testimonialRole','mapQuery',
+    'servicesEyebrow','servicesHeading','servicesSubheading',
+    'videosEyebrow','videosHeading','videosSubheading'
+  ];
+  simpleFields.forEach(key => {
+    const el = document.getElementById(key);
+    if (el) currentContent[key] = el.value;
+  });
+
+  const services = [];
+  for (let i = 0; i < serviceCount; i++) {
+    const titleEl = document.getElementById('svcTitle' + i);
+    if (!titleEl) continue; // این خدمت حذف شده بود
+    const title = titleEl.value.trim();
+    const desc = document.getElementById('svcDesc' + i).value.trim();
+    if (!title && !desc) continue; // ردیف کاملاً خالی را ذخیره نکن
+    services.push({ title: title, desc: desc });
+  }
+  currentContent.services = services;
+
+  const videos = [];
+  for (let i = 0; i < videoCount; i++) {
+    const urlEl = document.getElementById('vidUrl' + i);
+    if (!urlEl) continue; // این ویدیو حذف شده بود
+    const url = urlEl.value.trim();
+    const title = document.getElementById('vidTitle' + i).value.trim();
+    const desc = document.getElementById('vidDesc' + i).value.trim();
+    if (!url && !title && !desc) continue; // ردیف کاملاً خالی را ذخیره نکن
+    videos.push({ title: title, desc: desc, url: url });
+  }
+  currentContent.videos = videos;
+
+  // مقالات - از تمام ردیف‌های باقی‌مانده در صفحه (بعضی ممکن است حذف شده باشند) جمع‌آوری می‌شود
+  const articles = [];
+  for (let i = 0; i < articleCount; i++) {
+    const titleEl = document.getElementById('artTitle' + i);
+    if (!titleEl) continue; // این ردیف حذف شده بود
+    const title = titleEl.value.trim();
+    if (!title) continue; // ردیف خالی را ذخیره نکن
+    articles.push({
+      title: title,
+      summary: document.getElementById('artSummary' + i).value,
+      link: document.getElementById('artLink' + i).value
+    });
+  }
+  currentContent.articles = articles;
+
+  try {
+    const r = await fetch('/api/content', {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(currentContent)
+    });
+    if (r.ok) {
+      statusMsg.textContent = '✓ تغییرات با موفقیت روی سایت ذخیره شد';
+      statusMsg.className = 'status ok';
+    } else {
+      const d = await r.json();
+      statusMsg.textContent = d.error || 'خطا در ذخیره';
+      statusMsg.className = 'status bad';
+    }
+  } catch (e) {
+    statusMsg.textContent = 'خطا در ارتباط با سرور';
+    statusMsg.className = 'status bad';
+  }
+}
+
+checkLogin();
+</script>
+</body>
+</html>
