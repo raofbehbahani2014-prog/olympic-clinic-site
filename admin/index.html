@@ -443,6 +443,9 @@ function addArticle(data) {
 function escapeHtml(str) {
   return (str || '').replace(/"/g, '&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+function escapeAttr(str) {
+  return (str || '').replace(/"/g, '&quot;');
+}
 
 async function saveContent() {
   const statusMsg = document.getElementById('statusMsg');
