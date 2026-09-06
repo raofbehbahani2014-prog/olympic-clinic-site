@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>کلینیک پزشکی ورزشی المپیک | دکتر ابوالفضل هاشم‌پور | شیراز</title>
+<meta name="description" content="کلینیک پزشکی ورزشی المپیک زیر نظر دکتر ابوالفضل هاشم‌پور در شیراز؛ فیزیوتراپی، آب‌درمانی، باشگاه بدنسازی، تغذیه ورزشی، بازگشت به تمرین و آنالیز تخصصی بدن.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#08211f;
+    --deep:#0d2e2b;
+    --field:#123c37;
+    --field-2:#175048;
+    --line:#2c6a5e;
+    --paper:#f2ede1;
+    --paper-dim:#e7dfcd;
+    --pulse:#ff4d3d;
+    --pulse-dim:#ff6b53;
+    --gold:#c9a24b;
+    --track:#e2572b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 22px;}
+  ::selection{background:var(--pulse); color:#fff;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:3px solid var(--gold); outline-offset:3px; border-radius:4px;}
+
+  /* ===== TOPBAR ===== */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(8,33,31,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(201,162,75,0.25);
+  }
+  .topbar-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 22px; max-width:1180px; margin:0 auto; gap:10px;}
+  @media(max-width:600px){ #onlineBookingBtn span{display:none;} #onlineBookingBtn{padding:14px; } #onlineBookingBtn::before{content:"🗓"; } }
+  .brand{display:flex; align-items:center; gap:10px; color:var(--paper);}
+  .brand-mark{
+    width:52px; height:52px; border-radius:50%;
+    border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Teko', sans-serif; font-size:26px; font-weight:700; color:var(--gold);
+    flex-shrink:0;
+  }
+  .brand-text{line-height:1.25;}
+  .brand-text b{display:block; font-size:14px; font-weight:700; letter-spacing:.3px;}
+  .brand-text span{display:block; font-size:10.5px; color:var(--gold); letter-spacing:.5px;}
+  .nav-links{display:none; gap:26px; font-size:14px; color:var(--paper-dim);}
+  .nav-links a{position:relative; padding:4px 0; transition:color .2s;}
+  .nav-links a:hover{color:var(--gold);}
+  .top-cta{
+    background:var(--pulse); color:#fff; font-size:12.5px; font-weight:600;
+    padding:9px 16px; border-radius:100px; white-space:nowrap;
+    box-shadow:0 4px 14px rgba(255,77,61,.35);
+  }
+  @media(min-width:860px){ .nav-links{display:flex;} }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    background:radial-gradient(120% 140% at 15% -10%, #163f39 0%, var(--deep) 45%, var(--ink) 100%);
+    color:var(--paper);
+    padding:54px 0 40px;
+    overflow:hidden;
+  }
+  .hero-track{
+    position:absolute; inset:0; opacity:.5; pointer-events:none;
+  }
+  .hero-track svg{width:100%; height:100%;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12px; letter-spacing:1.2px; color:var(--gold);
+    border:1px solid rgba(201,162,75,.4); padding:6px 14px; border-radius:100px;
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--pulse); animation:blink 1.6s infinite;}
+  @keyframes blink{0%,100%{opacity:1;} 50%{opacity:.25;}}
+  .hero h1{
+    font-size:clamp(34px, 8vw, 58px);
+    font-weight:800; line-height:1.18; letter-spacing:-0.5px;
+    margin-bottom:18px;
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--pulse);
+    position:relative;
+  }
+  .hero p.lead{
+    font-size:16.5px; line-height:1.9; color:var(--paper-dim); max-width:560px; margin-bottom:30px;
+  }
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:44px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px; border-radius:100px; font-size:14.5px; font-weight:700;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--pulse); color:#fff; box-shadow:0 8px 24px rgba(255,77,61,.4);}
+  .btn-primary:hover{box-shadow:0 10px 28px rgba(255,77,61,.55); transform:translateY(-2px);}
+  .btn-ghost{border:1.5px solid rgba(242,237,225,.35); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold);}
+
+  .vitals{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    border-top:1px solid rgba(242,237,225,.15);
+    padding-top:24px;
+  }
+  .vital b{
+    font-family:'Teko', sans-serif; font-size:34px; font-weight:600; color:var(--paper);
+    display:block; line-height:1;
+  }
+  .vital span{font-size:11.5px; color:var(--paper-dim); letter-spacing:.3px;}
+
+  /* pulse-track signature line */
+  .pulse-line{width:100%; height:64px; margin:36px 0 6px;}
+  .pulse-line path{
+    fill:none; stroke:var(--pulse); stroke-width:2.5;
+    stroke-dasharray:1000; stroke-dashoffset:1000;
+    animation:draw 3.2s ease-out forwards, glow 2.6s ease-in-out infinite 3.2s;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes glow{0%,100%{opacity:1;} 50%{opacity:.55;}}
+
+  /* ===== SECTION HEADERS ===== */
+  .sec{padding:64px 0;}
+  .sec-head{max-width:640px; margin-bottom:40px;}
+  .sec-eyebrow{
+    font-size:12px; font-weight:700; letter-spacing:1.5px; color:var(--track);
+    display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .sec-eyebrow::before{content:""; width:26px; height:2px; background:var(--track);}
+  .sec-head h2{font-size:clamp(26px,5vw,38px); font-weight:800; line-height:1.3; color:var(--deep);}
+  .sec-head p{margin-top:14px; font-size:15px; line-height:1.9; color:#4b5c58;}
+
+  /* ===== ABOUT DOCTOR ===== */
+  .about{background:var(--paper);}
+  .about-grid{display:grid; gap:32px; align-items:center;}
+  .doc-card{
+    background:var(--deep); border-radius:22px; padding:30px;
+    color:var(--paper); position:relative; overflow:hidden;
+  }
+  .doc-card::before{
+    content:"دکتر"; position:absolute; top:-20px; left:-10px;
+    font-family:'Teko',sans-serif; font-size:140px; font-weight:700;
+    color:rgba(242,237,225,.05); line-height:1;
+  }
+  .doc-badge{
+    width:64px; height:64px; border-radius:16px; background:var(--field-2);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Teko',sans-serif; font-size:26px; color:var(--gold); font-weight:600;
+    margin-bottom:20px;
+  }
+  .doc-card h3{font-size:22px; font-weight:800; margin-bottom:4px; position:relative;}
+  .doc-card .role{color:var(--gold); font-size:13px; margin-bottom:18px; display:block; position:relative;}
+  .doc-card p{font-size:14.5px; line-height:2; color:var(--paper-dim); position:relative;}
+  .cred-list{list-style:none; margin-top:20px; display:grid; gap:10px; position:relative;}
+  .cred-list li{font-size:13.5px; color:var(--paper-dim); display:flex; gap:10px; align-items:flex-start;}
+  .cred-list li::before{content:"✓"; color:var(--track); font-weight:700; flex-shrink:0;}
+
+  .about-text p{font-size:15px; line-height:2; color:#3a4a46; margin-bottom:16px;}
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:26px;}
+  .stat-box{
+    background:#fff; border:1px solid var(--paper-dim); border-radius:14px; padding:16px 12px; text-align:center;
+  }
+  .stat-box b{font-family:'Teko',sans-serif; font-size:30px; color:var(--track); display:block;}
+  .stat-box span{font-size:11px; color:#6b7a76;}
+
+  @media(min-width:860px){ .about-grid{grid-template-columns:1fr 1.15fr;} }
+
+  /* ===== SERVICES ===== */
+  .services{background:var(--deep); color:var(--paper); position:relative;}
+  .services .sec-head h2{color:var(--paper);}
+  .services .sec-head p{color:var(--paper-dim);}
+  .services .sec-eyebrow{color:var(--gold);}
+  .services .sec-eyebrow::before{background:var(--gold);}
+
+  .svc-grid{display:grid; gap:16px; grid-template-columns:1fr;}
+  @media(min-width:640px){ .svc-grid{grid-template-columns:1fr 1fr;} }
+  @media(min-width:1000px){ .svc-grid{grid-template-columns:1fr 1fr 1fr;} }
+
+  .svc-card{
+    background:var(--field); border:1px solid rgba(201,162,75,.15);
+    border-radius:18px; padding:26px; position:relative; overflow:hidden;
+    transition:transform .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .svc-card:hover{transform:translateY(-4px); border-color:var(--gold); background:var(--field-2);}
+  .svc-num{
+    position:absolute; top:14px; left:18px; font-family:'Teko',sans-serif; font-size:15px;
+    color:rgba(242,237,225,.28); letter-spacing:1px;
+  }
+  .svc-icon{
+    width:50px; height:50px; border-radius:14px; background:rgba(255,77,61,.12);
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+    color:var(--pulse);
+  }
+  .svc-icon svg{width:24px; height:24px;}
+  .svc-card h3{font-size:17.5px; font-weight:700; margin-bottom:10px;}
+  .svc-card p{font-size:13.5px; line-height:1.9; color:var(--paper-dim);}
+
+  /* ===== PROCESS (بازگشت به تمرین) ===== */
+  .process{background:var(--paper);}
+  .steps{display:grid; gap:0; counter-reset:step; position:relative;}
+  .step{
+    display:grid; grid-template-columns:56px 1fr; gap:18px; padding:22px 0;
+    border-bottom:1px solid var(--paper-dim);
+  }
+  .step:last-child{border-bottom:none;}
+  .step-index{
+    font-family:'Teko',sans-serif; font-size:30px; color:var(--track); font-weight:600;
+    display:flex; align-items:flex-start; justify-content:center; padding-top:2px;
+  }
+  .step h4{font-size:16.5px; font-weight:700; color:var(--deep); margin-bottom:6px;}
+  .step p{font-size:14px; line-height:1.85; color:#57655f;}
+
+  /* ===== FACILITIES STRIP ===== */
+  .facilities{background:var(--paper-dim); padding:20px 0; overflow:hidden;}
+  .marquee{display:flex; gap:14px; width:max-content; animation:scroll 26s linear infinite;}
+  @keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+  .marquee span{
+    font-family:'Teko',sans-serif; font-size:22px; font-weight:500; color:var(--deep);
+    display:flex; align-items:center; gap:14px; white-space:nowrap;
+  }
+  .marquee span::after{content:"●"; color:var(--pulse); font-size:9px;}
+
+  /* ===== TESTIMONIAL / TRUST ===== */
+  .trust{background:var(--paper); padding-top:0;}
+  .trust-card{
+    background:#fff; border:1px solid var(--paper-dim); border-radius:20px; padding:30px;
+    position:relative;
+  }
+  .trust-card::before{
+    content:"”"; position:absolute; top:6px; right:22px; font-size:70px; font-family:Georgia,serif;
+    color:var(--paper-dim); line-height:1;
+  }
+  .trust-card p{font-size:15.5px; line-height:2; color:#3a4a46; position:relative; margin-bottom:16px;}
+  .trust-who{display:flex; align-items:center; gap:12px;}
+  .trust-avatar{width:42px; height:42px; border-radius:50%; background:var(--track); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px;}
+  .trust-who b{display:block; font-size:14px; color:var(--deep);}
+  .trust-who span{font-size:12px; color:#7a8b86;}
+
+  /* ===== CONTACT / MAP ===== */
+  .contact{
+    background:radial-gradient(120% 140% at 85% 110%, #163f39 0%, var(--deep) 45%, var(--ink) 100%);
+    color:var(--paper);
+  }
+  .contact .sec-head h2{color:var(--paper);}
+  .contact .sec-head p{color:var(--paper-dim);}
+  .contact .sec-eyebrow{color:var(--gold);}
+  .contact .sec-eyebrow::before{background:var(--gold);}
+  .contact-grid{display:grid; gap:20px;}
+  @media(min-width:860px){ .contact-grid{grid-template-columns:1fr 1fr;} }
+  .info-list{display:grid; gap:16px;}
+  .info-item{
+    display:flex; gap:14px; align-items:flex-start; background:rgba(242,237,225,.05);
+    border:1px solid rgba(201,162,75,.18); border-radius:16px; padding:18px;
+  }
+  .info-icon{
+    width:40px; height:40px; border-radius:12px; background:var(--field-2); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; color:var(--gold);
+  }
+  .info-icon svg{width:19px; height:19px;}
+  .info-item b{display:block; font-size:14px; margin-bottom:3px;}
+  .info-item span, .info-item a{font-size:13px; color:var(--paper-dim); line-height:1.8;}
+  .info-item a:hover{color:var(--gold);}
+
+  .map-box{
+    border-radius:18px; overflow:hidden; border:1px solid rgba(201,162,75,.25); min-height:280px;
+  }
+  .map-box iframe{width:100%; height:100%; min-height:280px; border:0; filter:grayscale(.15) contrast(1.05);}
+
+  .hours-table{width:100%; border-collapse:collapse; margin-top:6px; font-size:13.5px;}
+  .hours-table td{padding:9px 0; border-bottom:1px dashed rgba(242,237,225,.15); color:var(--paper-dim);}
+  .hours-table td:first-child{color:var(--paper); font-weight:600;}
+  .hours-table tr:last-child td{border-bottom:none;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--ink); color:var(--paper-dim); padding:38px 0 100px; font-size:13px;}
+  .foot-top{display:flex; flex-direction:column; gap:18px; padding-bottom:22px; border-bottom:1px solid rgba(242,237,225,.1); margin-bottom:18px;}
+  @media(min-width:640px){ .foot-top{flex-direction:row; align-items:center; justify-content:space-between;} }
+  .foot-brand{display:flex; align-items:center; gap:10px; color:var(--paper); font-weight:700; font-size:15px;}
+  .foot-social{display:flex; gap:10px;}
+  .foot-social a{
+    width:36px; height:36px; border-radius:50%; border:1px solid rgba(242,237,225,.2);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .foot-social a:hover{border-color:var(--gold); color:var(--gold);}
+  .foot-bottom{display:flex; flex-direction:column; gap:8px; color:#6f7f7b; font-size:12px;}
+  @media(min-width:640px){ .foot-bottom{flex-direction:row; justify-content:space-between;} }
+
+  /* ===== STICKY MOBILE CTA ===== */
+  .mobile-cta{
+    position:fixed; bottom:0; inset-inline:0; z-index:60;
+    background:rgba(8,33,31,.97); backdrop-filter:blur(10px);
+    border-top:1px solid rgba(201,162,75,.3);
+    display:flex; gap:10px; padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  }
+  .mobile-cta a{
+    flex:1; text-align:center; padding:13px 10px; border-radius:100px; font-size:13.5px; font-weight:700;
+  }
+  .mobile-cta .call{background:var(--pulse); color:#fff;}
+  .mobile-cta .map{border:1.5px solid rgba(242,237,225,.3); color:var(--paper);}
+  @media(min-width:860px){ .mobile-cta{display:none;} footer{padding-bottom:38px;} }
+
+  .reveal{opacity:1; transform:none;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <img id="brandLogoImg" style="display:none; width:56px; height:56px; border-radius:50%; object-fit:cover; border:2px solid var(--gold);" alt="لوگو کلینیک">
+      <div class="brand-mark" id="brandMarkText">M</div>
+      <div class="brand-text">
+        <b data-key="clinicName">کلینیک پزشکی ورزشی المپیک</b>
+        <span data-key="doctorLine">دکتر ابوالفضل هاشم‌پور · شیراز</span>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#about">درباره دکتر</a>
+      <a href="#services">خدمات</a>
+      <a href="#process">بازگشت به تمرین</a>
+      <a href="#contact">تماس و آدرس</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <a class="top-cta" id="onlineBookingBtn" href="#" target="_blank" rel="noopener" style="display:none; background:var(--gold); color:var(--ink);"><span data-key="onlineBookingText">رزرو آنلاین نوبت</span></a>
+      <a class="top-cta" data-href-key="phoneTel" href="tel:+987100000000"><span data-key="topCtaText">نوبت‌دهی تلفنی</span></a>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-track" aria-hidden="true">
+    <svg viewBox="0 0 800 400" preserveAspectRatio="none">
+      <path d="M -50 350 C 150 250, 250 380, 420 300 S 700 120, 900 180" stroke="#c9a24b" stroke-opacity="0.18" stroke-width="1.5" fill="none"/>
+      <path d="M -50 260 C 180 320, 300 180, 480 220 S 750 60, 900 90" stroke="#c9a24b" stroke-opacity="0.12" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span> پزشکی ورزشی مبتنی بر آنالیز، در شیراز</span>
+    <h1><span data-key="heroTitlePart1">از مصدومیت تا اوج آمادگی،</span><br><em data-key="heroTitlePart2">زیر نظر دکتر هاشم‌پور</em></h1>
+    <p class="lead" data-key="heroLead">کلینیک پزشکی ورزشی المپیک، مسیر درمان و بازگشت به تمرین ورزشکاران حرفه‌ای و افراد عادی را با ترکیب فیزیوتراپی، آب‌درمانی، تغذیه ورزشی و آنالیز تخصصی بدن، قدم‌به‌قدم طراحی می‌کند.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" data-href-key="phoneTel" href="tel:+987100000000">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span data-key="heroCtaPrimary">رزرو نوبت</span>
+      </a>
+      <a class="btn btn-ghost" href="#services"><span data-key="heroCtaSecondary">مشاهده خدمات کلینیک</span></a>
+    </div>
+
+    <div class="pulse-line" aria-hidden="true">
+      <svg viewBox="0 0 600 64" preserveAspectRatio="none" width="100%" height="64">
+        <path d="M0 32 L120 32 L145 8 L165 56 L190 20 L210 32 L260 32 L280 14 L300 50 L320 32 L600 32"/>
+      </svg>
+    </div>
+
+    <div class="vitals">
+      <div class="vital"><b data-key="statYears">+15</b><span>سال سابقه بالینی دکتر هاشم‌پور</span></div>
+      <div class="vital"><b data-key="statUnits">۶</b><span>واحد تخصصی زیر یک سقف</span></div>
+      <div class="vital"><b data-key="statCity">شیراز</b><span>دسترسی آسان، پارکینگ اختصاصی</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="sec about" id="about">
+  <div class="wrap about-grid">
+    <div class="doc-card reveal">
+      <div class="doc-badge" data-key="doctorInitials">AH</div>
+      <h3 data-key="doctorName">دکتر ابوالفضل هاشم‌پور</h3>
+      <span class="role" data-key="doctorRole">مدیر فنی و پزشک مسئول کلینیک پزشکی ورزشی المپیک</span>
+      <p data-key="doctorDesc">مسئولیت طراحی و نظارت بر مسیر درمانی هر مراجعه‌کننده، از ارزیابی اولیه تا بازگشت ایمن به تمرین، شخصاً بر عهده ایشان است.</p>
+      <ul class="cred-list" id="credList">
+        <li data-key="cred0">ارزیابی و تشخیص تخصصی آسیب‌های ورزشی</li>
+        <li data-key="cred1">طراحی برنامه درمانی اختصاصی برای هر مراجعه‌کننده</li>
+        <li data-key="cred2">نظارت مستقیم بر روند فیزیوتراپی و بازتوانی</li>
+        <li data-key="cred3">همکاری تیمی با متخصص تغذیه و مربیان بدنسازی کلینیک</li>
+      </ul>
+    </div>
+    <div class="about-text reveal">
+      <div class="sec-eyebrow" data-key="aboutEyebrow">درباره کلینیک</div>
+      <h2 data-key="aboutHeading" style="font-size:clamp(24px,4.5vw,32px); font-weight:800; color:var(--deep); margin-bottom:16px;">یک تیم، یک پرونده، یک مسیر درمانی مشخص</h2>
+      <p data-key="aboutText1">در کلینیک پزشکی ورزشی المپیک، درمان مصدومیت با مشاوره تغذیه و آماده‌سازی بدنی در یک مسیر واحد ادغام می‌شود. مراجعه‌کننده از لحظه ورود تا لحظه بازگشت به میدان یا باشگاه، تحت نظر یک تیم هماهنگ قرار دارد؛ نه چند مرکز پراکنده.</p>
+      <p data-key="aboutText2">این رویکرد، هم برای ورزشکاران حرفه‌ای که به دنبال بازگشت سریع و ایمن به رقابت هستند کاربرد دارد، و هم برای افراد عادی که با کمردرد، زانودرد یا آسیب‌های روزمره مراجعه می‌کنند.</p>
+      <div class="stat-row">
+        <div class="stat-box"><b data-key="aboutStat1Num">۶</b><span data-key="aboutStat1Label">واحد تخصصی</span></div>
+        <div class="stat-box"><b data-key="aboutStat2Num">۱</b><span data-key="aboutStat2Label">پرونده درمانی یکپارچه</span></div>
+        <div class="stat-box"><b data-key="aboutStat3Num">۷</b><span data-key="aboutStat3Label">روز هفته پاسخگو</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow" data-key="servicesEyebrow">امکانات کلینیک</div>
+      <h2 data-key="servicesHeading">نه واحد تخصصی، زیر نظر یک تیم</h2>
+      <p data-key="servicesSubheading">هر واحد بخشی از مسیر مشترک درمان تا آمادگی است؛ نه یک خدمت جدا از بقیه.</p>
+    </div>
+    <div class="svc-grid" id="svcGrid">
+      <!-- کارت‌های خدمات به‌صورت خودکار از روی محتوای پنل مدیریت اینجا ساخته می‌شوند -->
+    </div>
+  </div>
+</section>
+
+<section class="sec process" id="process">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">مسیر درمان</div>
+      <h2>از ارزیابی تا بازگشت ایمن به میدان</h2>
+      <p>چهار گام مشخص، از اولین ویزیت تا روزی که دوباره با اطمینان تمرین می‌کنید.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-index">۱</div>
+        <div><h4>ارزیابی و تشخیص اولیه</h4><p>معاینه بالینی توسط دکتر هاشم‌پور و در صورت نیاز، آنالیز تخصصی بدن برای شناخت دقیق منشأ مشکل.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-index">۲</div>
+        <div><h4>طراحی برنامه درمانی</h4><p>ترکیب فیزیوتراپی، آب‌درمانی و در صورت نیاز مشاوره تغذیه، متناسب با شرایط و هدف فرد.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-index">۳</div>
+        <div><h4>بازتوانی و تمرین کنترل‌شده</h4><p>افزایش تدریجی بار تمرینی در باشگاه بدنسازی کلینیک، زیر نظر مربی و با پایش پزشکی.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-index">۴</div>
+        <div><h4>بازگشت ایمن به تمرین/رقابت</h4><p>تأیید نهایی بر اساس معیارهای عملکردی، نه فقط گذر زمان؛ کاهش واقعی خطر آسیب مجدد.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec process" id="video-section" style="display:none;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow" data-key="videosEyebrow">ویدیوی معرفی</div>
+      <h2 data-key="videosHeading">با فضای کلینیک آشنا شوید</h2>
+      <p data-key="videosSubheading">نگاهی به فضای درمانی، باشگاه بدنسازی و تیم کلینیک پزشکی ورزشی المپیک.</p>
+    </div>
+    <div id="videosGrid" style="display:grid; gap:20px; grid-template-columns:1fr;">
+      <!-- کارت‌های ویدیو به‌صورت خودکار از روی محتوای پنل مدیریت اینجا ساخته می‌شوند -->
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="articles-section" style="display:none;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">مقالات و آموزش</div>
+      <h2>مطالب آموزشی کلینیک</h2>
+      <p>یادداشت‌های کوتاه درباره پیشگیری از آسیب، تغذیه ورزشی و بازتوانی.</p>
+    </div>
+    <div id="articlesGrid" class="svc-grid" style="grid-template-columns:1fr;"></div>
+  </div>
+</section>
+
+<div class="facilities">
+  <div class="marquee" aria-hidden="true">
+    <span>فیزیوتراپی</span><span>آب‌درمانی</span><span>باشگاه بدنسازی</span><span>تخصص تغذیه</span><span>بازگشت به تمرین</span><span>آنالیز تخصصی بدن</span>
+    <span>فیزیوتراپی</span><span>آب‌درمانی</span><span>باشگاه بدنسازی</span><span>تخصص تغذیه</span><span>بازگشت به تمرین</span><span>آنالیز تخصصی بدن</span>
+  </div>
+</div>
+
+<section class="sec trust">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">تجربه مراجعه‌کنندگان</div>
+      <h2>برای ورزشکار حرفه‌ای و آدم معمولی، یک استاندارد</h2>
+    </div>
+    <div class="trust-card reveal">
+      <p data-key="testimonialText">در کلینیک المپیک، درمان فقط رفع درد نبود؛ برنامه تمرینی من با نظر دکتر هاشم‌پور و هماهنگی مربی باشگاه، مرحله‌به‌مرحله جلو رفت تا با اطمینان به تمرین برگشتم.</p>
+      <div class="trust-who">
+        <div class="trust-avatar">و</div>
+        <div><b data-key="testimonialName">یک ورزشکار مراجعه‌کننده</b><span data-key="testimonialRole">دوره بازگشت به تمرین</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">نوبت‌دهی و آدرس</div>
+      <h2>در شیراز، منتظر شما هستیم</h2>
+      <p>برای هماهنگی نوبت با دکتر هاشم‌پور یا هر یک از واحدهای تخصصی، از راه‌های زیر با ما در تماس باشید.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><b>تماس تلفنی</b><a data-href-key="phoneTel" data-key="phoneDisplay" href="tel:+987100000000">071-00000000</a></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><b>آدرس کلینیک</b><span data-key="address">شیراز — جهت راهنمایی دقیق، لطفاً هنگام تماس آدرس را از منشی کلینیک دریافت کنید.</span></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l9 6 9-6"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg></div>
+            <div><b>ایمیل / پیام</b><a href="#">درخواست تماس آنلاین</a></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <div>
+              <b>ساعات پذیرش</b>
+              <table class="hours-table">
+                <tr><td>شنبه تا چهارشنبه</td><td data-key="hoursSatToWed">۹:۰۰ تا ۲۱:۰۰</td></tr>
+                <tr><td>پنجشنبه</td><td data-key="hoursThu">۹:۰۰ تا ۱۸:۰۰</td></tr>
+                <tr><td>جمعه</td><td data-key="hoursFri">ویژه موارد اورژانسی ورزشی</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="map-box">
+          <iframe title="نقشه موقعیت کلینیک پزشکی ورزشی المپیک در شیراز" loading="lazy" src="https://www.google.com/maps?q=شیراز&output=embed" data-map-key="mapQuery"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img id="footerLogoImg" style="display:none; width:32px; height:32px; border-radius:50%; object-fit:cover;" alt="لوگو کلینیک">
+        <div class="brand-mark" id="footerMarkText" style="width:32px;height:32px;font-size:16px;">M</div>
+        کلینیک پزشکی ورزشی المپیک
+      </div>
+      <div class="foot-social">
+        <a href="#" aria-label="اینستاگرام"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="تلگرام"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg></a>
+        <a href="tel:+987100000000" aria-label="تماس"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-key="footerText1">© تمامی حقوق برای کلینیک پزشکی ورزشی المپیک محفوظ است.</span>
+      <span data-key="footerText2">زیر نظر دکتر ابوالفضل هاشم‌پور — شیراز</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-cta">
+  <a class="call" data-href-key="phoneTel" href="tel:+987100000000">📞 <span data-key="mobileCtaCall">تماس فوری</span></a>
+  <a class="map" href="#contact">📍 <span data-key="mobileCtaMap">آدرس و نوبت</span></a>
+</div>
+
+
+
+<script>
+// این اسکریپت متن‌های سایت را از فایل content.json (که پنل مدیریت آن را ویرایش می‌کند) می‌خواند
+// cache: 'no-store' تضمین می‌کند مرورگر همیشه آخرین نسخه محتوا را بگیرد، نه نسخه کش‌شده قدیمی
+fetch('/api/content', { cache: 'no-store' })
+  .then(r => r.json())
+  .then(c => {
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (c[key] !== undefined) el.textContent = c[key];
+    });
+    document.querySelectorAll('[data-href-key]').forEach(el => {
+      const key = el.getAttribute('data-href-key');
+      if (key === 'phoneTel' && c.phone) el.setAttribute('href', 'tel:+98' + c.phone.replace(/^0/, ''));
+    });
+    const map = document.querySelector('[data-map-key]');
+    if (map && c.mapQuery) map.src = 'https://www.google.com/maps?q=' + encodeURIComponent(c.mapQuery) + '&output=embed';
+    if (c.instagram) { const a = document.querySelector('a[aria-label="اینستاگرام"]'); if(a) a.href = c.instagram; }
+    if (c.telegram) { const a = document.querySelector('a[aria-label="تلگرام"]'); if(a) a.href = c.telegram; }
+    document.querySelectorAll('a[aria-label="تماس"]').forEach(a => { if(c.phone) a.href = 'tel:+98' + c.phone.replace(/^0/, ''); });
+
+    // خدمات (کارت‌ها) - تعداد نامحدود، از روی آرایه services ساخته می‌شود
+    const svcIcons = [
+      '<path d="M14 4l6 6-8.5 8.5a2.12 2.12 0 0 1-3-3L17 6"/><path d="M6 20l1.5-1.5"/><path d="M2 22l3-3"/>',
+      '<path d="M2 12c1.5 2 3.5 2 5 0s3.5-2 5 0 3.5 2 5 0 3.5-2 5 0"/><path d="M2 18c1.5 2 3.5 2 5 0s3.5-2 5 0 3.5 2 5 0 3.5-2 5 0"/><path d="M12 2v9"/>',
+      '<path d="M6.5 6.5h11v11h-11z"/><path d="M2 9v6M22 9v6M9 2h6M9 22h6"/>',
+      '<path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><path d="M9 9l1.5 1.5L15 6"/>',
+      '<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>',
+      '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',
+      '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
+      '<path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/>',
+      '<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>'
+    ];
+    if (Array.isArray(c.services)) {
+      const grid = document.getElementById('svcGrid');
+      if (grid) {
+        grid.innerHTML = '';
+        c.services.forEach((s, i) => {
+          if (!s || !s.title) return;
+          const num = String(i + 1).padStart(2, '0').replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+          const icon = svcIcons[i % svcIcons.length];
+          const card = document.createElement('div');
+          card.className = 'svc-card reveal';
+          card.innerHTML = `
+            <span class="svc-num">${num}</span>
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${icon}</svg></div>
+            <h3>${escapeHtml(s.title)}</h3>
+            <p>${escapeHtml(s.desc || '')}</p>
+          `;
+          grid.appendChild(card);
+        });
+      }
+    }
+
+    // لوگو در هدر و فوتر - اگر از پنل مدیریت آپلود شده باشد به‌جای حرف اول نمایش داده می‌شود
+    if (c.logoUrl && c.logoUrl.trim() !== '') {
+      const headerImg = document.getElementById('brandLogoImg');
+      const headerText = document.getElementById('brandMarkText');
+      const footerImg = document.getElementById('footerLogoImg');
+      const footerText = document.getElementById('footerMarkText');
+      if (headerImg) { headerImg.src = c.logoUrl; headerImg.style.display = 'block'; }
+      if (headerText) headerText.style.display = 'none';
+      if (footerImg) { footerImg.src = c.logoUrl; footerImg.style.display = 'block'; }
+      if (footerText) footerText.style.display = 'none';
+    }
+
+    // دکمه رزرو آنلاین نوبت - فقط وقتی لینک سایت دکتر در پنل مدیریت وارد شده باشد نمایش داده می‌شود
+    if (c.onlineBookingUrl && c.onlineBookingUrl.trim() !== '') {
+      const btn = document.getElementById('onlineBookingBtn');
+      if (btn) { btn.href = c.onlineBookingUrl.trim(); btn.style.display = 'inline-flex'; }
+    }
+
+    // مدارک و افتخارات دکتر (لیست تیک‌دار)
+    for (let i = 0; i < 4; i++) {
+      const el = document.querySelector(`[data-key="cred${i}"]`);
+      if (el && c['cred' + i] !== undefined) el.textContent = c['cred' + i];
+    }
+
+    // ویدیوهای معرفی - فقط وقتی حداقل یک ویدیو در پنل مدیریت با لینک معتبر ثبت شده باشد نمایش داده می‌شود
+    if (Array.isArray(c.videos) && c.videos.length > 0) {
+      const grid = document.getElementById('videosGrid');
+      const section = document.getElementById('video-section');
+      if (grid && section) {
+        grid.innerHTML = '';
+        let shown = 0;
+        c.videos.forEach(v => {
+          if (!v || !v.url || v.url.trim() === '') return;
+          const embedUrl = toEmbedUrl(v.url.trim());
+          if (!embedUrl) return;
+          shown++;
+          const card = document.createElement('div');
+          card.innerHTML = `
+            ${v.title ? `<h3 style="font-size:17px; font-weight:700; color:var(--deep); margin-bottom:8px;">${escapeHtml(v.title)}</h3>` : ''}
+            ${v.desc ? `<p style="font-size:13.5px; color:#57655f; margin-bottom:10px;">${escapeHtml(v.desc)}</p>` : ''}
+            <div style="border-radius:18px; overflow:hidden; border:1px solid var(--paper-dim); aspect-ratio:16/9; background:#000;">
+              <iframe src="${escapeAttr(embedUrl)}" style="width:100%; height:100%; border:0;" allowfullscreen loading="lazy" title="${escapeAttr(v.title || 'ویدیوی معرفی کلینیک')}"></iframe>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+        if (shown > 0) section.style.display = 'block';
+      }
+    }
+
+    // مقالات - فقط وقتی حداقل یک مقاله در پنل مدیریت ثبت شده باشد نمایش داده می‌شود
+    if (Array.isArray(c.articles) && c.articles.length > 0) {
+      const grid = document.getElementById('articlesGrid');
+      const section = document.getElementById('articles-section');
+      grid.innerHTML = '';
+      c.articles.forEach(a => {
+        if (!a.title) return;
+        const card = document.createElement('div');
+        card.className = 'svc-card';
+        card.style.background = '#fff';
+        card.style.border = '1px solid var(--paper-dim)';
+        card.style.color = 'var(--ink)';
+        const linkHtml = a.link ? `<a href="${escapeAttr(a.link)}" style="color:var(--track); font-size:13px; font-weight:700;" target="_blank" rel="noopener">ادامه مطلب ←</a>` : '';
+        card.innerHTML = `<h3 style="color:var(--deep);">${escapeHtml(a.title)}</h3><p style="color:#57655f; margin-bottom:12px;">${escapeHtml(a.summary || '')}</p>${linkHtml}`;
+        grid.appendChild(card);
+      });
+      if (grid.children.length > 0) section.style.display = 'block';
+    }
+  })
+  .catch(() => { /* اگر API در دسترس نبود، متن‌های پیش‌فرض همان‌طور که در HTML نوشته شده نمایش داده می‌شوند */ });
+
+function toEmbedUrl(url) {
+  try {
+    const u = new URL(url);
+    if (u.hostname.includes('youtube.com') && u.searchParams.get('v')) {
+      return 'https://www.youtube.com/embed/' + u.searchParams.get('v');
+    }
+    if (u.hostname === 'youtu.be') {
+      return 'https://www.youtube.com/embed/' + u.pathname.replace('/', '');
+    }
+    if (u.hostname.includes('aparat.com')) {
+      if (u.pathname.includes('/embed/')) return url; // از قبل لینک embed است
+      const match = u.pathname.match(/\/v\/([a-zA-Z0-9]+)/);
+      if (match && match[1]) {
+        return 'https://www.aparat.com/video/video/embed/videohash/' + match[1] + '/vt/frame';
+      }
+      return url;
+    }
+    return url; // اگر لینک از قبل embed بود یا سرویس دیگری بود، همان را استفاده کن
+  } catch (e) { return null; }
+}
+function escapeHtml(str) { return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escapeAttr(str) { return (str||'').replace(/"/g,'&quot;'); }
+</script>
+</body>
+</html>
