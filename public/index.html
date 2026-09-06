@@ -655,11 +655,15 @@ fetch('/api/content', { cache: 'no-store' })
           const embedUrl = toEmbedUrl(v.url.trim());
           if (!embedUrl) return;
           shown++;
+          const isInstagram = v.url.includes('instagram.com');
+          const boxStyle = isInstagram
+            ? 'border-radius:18px; overflow:hidden; border:1px solid var(--paper-dim); max-width:400px; margin:0 auto; height:640px; background:#000;'
+            : 'border-radius:18px; overflow:hidden; border:1px solid var(--paper-dim); aspect-ratio:16/9; background:#000;';
           const card = document.createElement('div');
           card.innerHTML = `
             ${v.title ? `<h3 style="font-size:17px; font-weight:700; color:var(--deep); margin-bottom:8px;">${escapeHtml(v.title)}</h3>` : ''}
             ${v.desc ? `<p style="font-size:13.5px; color:#57655f; margin-bottom:10px;">${escapeHtml(v.desc)}</p>` : ''}
-            <div style="border-radius:18px; overflow:hidden; border:1px solid var(--paper-dim); aspect-ratio:16/9; background:#000;">
+            <div style="${boxStyle}">
               <iframe src="${escapeAttr(embedUrl)}" style="width:100%; height:100%; border:0;" allowfullscreen loading="lazy" title="${escapeAttr(v.title || 'ویدیوی معرفی کلینیک')}"></iframe>
             </div>
           `;
@@ -704,6 +708,13 @@ function toEmbedUrl(url) {
       const match = u.pathname.match(/\/v\/([a-zA-Z0-9]+)/);
       if (match && match[1]) {
         return 'https://www.aparat.com/video/video/embed/videohash/' + match[1] + '/vt/frame';
+      }
+      return url;
+    }
+    if (u.hostname.includes('instagram.com')) {
+      const match = u.pathname.match(/\/(p|reel|tv)\/([a-zA-Z0-9_-]+)/);
+      if (match) {
+        return 'https://www.instagram.com/' + match[1] + '/' + match[2] + '/embed';
       }
       return url;
     }
