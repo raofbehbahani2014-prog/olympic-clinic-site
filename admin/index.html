@@ -218,7 +218,7 @@
       <input id="videosHeading" />
       <label>توضیح زیر عنوان</label>
       <textarea id="videosSubheading"></textarea>
-      <p style="font-size:12.5px; color:#6b7a76; margin:14px 0;">هر تعداد ویدیو که بخواهید اضافه کنید؛ هرکدام عنوان، توضیح کوتاه و لینک (یوتیوب یا آپارات) مخصوص به خودش دارد. تا وقتی هیچ ویدیویی با لینک معتبر ثبت نشده، این بخش روی سایت نمایش داده نمی‌شود.</p>
+      <p style="font-size:12.5px; color:#6b7a76; margin:14px 0;">هر تعداد ویدیو که بخواهید اضافه کنید؛ هرکدام عنوان، توضیح کوتاه و لینک (یوتیوب، آپارات یا اینستاگرام) مخصوص به خودش دارد. تا وقتی هیچ ویدیویی با لینک معتبر ثبت نشده، این بخش روی سایت نمایش داده نمی‌شود.</p>
       <div id="videosList"></div>
       <button type="button" onclick="addVideo()" style="background:var(--field); color:#fff; border:none; padding:10px 18px; border-radius:8px; font-family:inherit; font-size:13px; cursor:pointer; margin-top:6px;">+ افزودن ویدیوی جدید</button>
     </div>
@@ -381,7 +381,7 @@ function addVideo(data) {
     <input id="vidTitle${i}" value="${escapeHtml(data && data.title || '')}">
     <label>توضیح کوتاه</label>
     <textarea id="vidDesc${i}">${escapeHtml(data && data.desc || '')}</textarea>
-    <label>لینک ویدیو (یوتیوب یا آپارات)</label>
+    <label>لینک ویدیو (یوتیوب، آپارات یا اینستاگرام)</label>
     <input id="vidUrl${i}" value="${escapeHtml(data && data.url || '')}" placeholder="https://www.youtube.com/watch?v=...">
     <button type="button" onclick="document.getElementById('videoBox${i}').remove()" style="background:transparent; color:var(--pulse); border:1px solid var(--pulse); padding:6px 14px; border-radius:8px; font-family:inherit; font-size:12px; cursor:pointer; margin-top:4px;">حذف این ویدیو</button>
   `;
