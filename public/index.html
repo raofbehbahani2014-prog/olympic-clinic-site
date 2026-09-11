@@ -333,10 +333,10 @@
       </div>
     </div>
     <nav class="nav-links">
-      <a href="#about">درباره دکتر</a>
-      <a href="#services">خدمات</a>
-      <a href="#process">بازگشت به تمرین</a>
-      <a href="#contact">تماس و آدرس</a>
+      <a href="#about"><span data-key="navAbout">درباره دکتر</span></a>
+      <a href="#services"><span data-key="navServices">خدمات</span></a>
+      <a href="#process"><span data-key="navProcess">بازگشت به تمرین</span></a>
+      <a href="#contact"><span data-key="navContact">تماس و آدرس</span></a>
     </nav>
     <div style="display:flex; align-items:center; gap:10px;">
       <a class="top-cta" id="onlineBookingBtn" href="#" target="_blank" rel="noopener" style="display:none; background:var(--gold); color:var(--ink);"><span data-key="onlineBookingText">رزرو آنلاین نوبت</span></a>
@@ -471,6 +471,28 @@
   </div>
 </section>
 
+<section class="sec" id="team-section" style="display:none; background:var(--paper);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow" data-key="teamEyebrow">تیم درمانی</div>
+      <h2 data-key="teamHeading">با تیم کلینیک آشنا شوید</h2>
+      <p data-key="teamSubheading">هر عضو تیم، بخشی از مسیر درمان و آماده‌سازی شما را بر عهده دارد.</p>
+    </div>
+    <div id="teamGrid" class="svc-grid"></div>
+  </div>
+</section>
+
+<section class="sec" id="gallery-section" style="display:none; background:var(--paper-dim);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow" data-key="galleryEyebrow">گالری تصاویر</div>
+      <h2 data-key="galleryHeading">نگاهی به فضای کلینیک</h2>
+      <p data-key="gallerySubheading">تصاویری از فضای درمانی، باشگاه بدنسازی و استخر آب‌درمانی کلینیک.</p>
+    </div>
+    <div id="galleryGrid" style="display:grid; gap:14px; grid-template-columns:repeat(2,1fr);"></div>
+  </div>
+</section>
+
 <div class="facilities">
   <div class="marquee" aria-hidden="true">
     <span>فیزیوتراپی</span><span>آب‌درمانی</span><span>باشگاه بدنسازی</span><span>تخصص تغذیه</span><span>بازگشت به تمرین</span><span>آنالیز تخصصی بدن</span>
@@ -549,6 +571,8 @@
       <div class="foot-social">
         <a href="#" aria-label="اینستاگرام"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
         <a href="#" aria-label="تلگرام"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg></a>
+        <a href="#" aria-label="واتساپ" style="display:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21l1.65-4.95A9 9 0 1 1 8.05 19.35L3 21z"/><path d="M9 10a1 1 0 0 0 1 1 3 3 0 0 0 3-3 1 1 0 0 0-1-1"/><path d="M9 10a5 5 0 0 0 5 5"/></svg></a>
+        <a href="#" aria-label="بله" style="display:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
         <a href="tel:+987100000000" aria-label="تماس"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
       </div>
     </div>
@@ -584,6 +608,14 @@ fetch('/api/content', { cache: 'no-store' })
     if (map && c.mapQuery) map.src = 'https://www.google.com/maps?q=' + encodeURIComponent(c.mapQuery) + '&output=embed';
     if (c.instagram) { const a = document.querySelector('a[aria-label="اینستاگرام"]'); if(a) a.href = c.instagram; }
     if (c.telegram) { const a = document.querySelector('a[aria-label="تلگرام"]'); if(a) a.href = c.telegram; }
+    if (c.whatsapp && c.whatsapp.trim() !== '') {
+      const a = document.querySelector('a[aria-label="واتساپ"]');
+      if (a) { a.href = c.whatsapp; a.style.display = 'flex'; }
+    }
+    if (c.bale && c.bale.trim() !== '') {
+      const a = document.querySelector('a[aria-label="بله"]');
+      if (a) { a.href = c.bale; a.style.display = 'flex'; }
+    }
     document.querySelectorAll('a[aria-label="تماس"]').forEach(a => { if(c.phone) a.href = 'tel:+98' + c.phone.replace(/^0/, ''); });
 
     // خدمات (کارت‌ها) - تعداد نامحدود، از روی آرایه services ساخته می‌شود
@@ -688,6 +720,47 @@ fetch('/api/content', { cache: 'no-store' })
         const linkHtml = a.link ? `<a href="${escapeAttr(a.link)}" style="color:var(--track); font-size:13px; font-weight:700;" target="_blank" rel="noopener">ادامه مطلب ←</a>` : '';
         card.innerHTML = `<h3 style="color:var(--deep);">${escapeHtml(a.title)}</h3><p style="color:#57655f; margin-bottom:12px;">${escapeHtml(a.summary || '')}</p>${linkHtml}`;
         grid.appendChild(card);
+      });
+      if (grid.children.length > 0) section.style.display = 'block';
+    }
+
+    // پرسنل کلینیک - فقط وقتی حداقل یک نفر در پنل مدیریت ثبت شده باشد نمایش داده می‌شود
+    if (Array.isArray(c.team) && c.team.length > 0) {
+      const grid = document.getElementById('teamGrid');
+      const section = document.getElementById('team-section');
+      grid.innerHTML = '';
+      c.team.forEach(p => {
+        if (!p || !p.name) return;
+        const card = document.createElement('div');
+        card.className = 'svc-card';
+        const photoHtml = p.photo
+          ? `<img src="${escapeAttr(p.photo)}" alt="${escapeAttr(p.name)}" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:14px; margin-bottom:16px;">`
+          : `<div style="width:100%; aspect-ratio:1; border-radius:14px; margin-bottom:16px; background:var(--field); display:flex; align-items:center; justify-content:center; color:var(--paper-dim); font-family:'Teko',sans-serif; font-size:40px;">${escapeHtml((p.name || '؟').charAt(0))}</div>`;
+        card.innerHTML = `
+          ${photoHtml}
+          <h3>${escapeHtml(p.name)}</h3>
+          ${p.role ? `<div style="color:var(--pulse); font-size:13px; font-weight:700; margin-bottom:10px;">${escapeHtml(p.role)}</div>` : ''}
+          ${p.desc ? `<p>${escapeHtml(p.desc)}</p>` : ''}
+        `;
+        grid.appendChild(card);
+      });
+      if (grid.children.length > 0) section.style.display = 'block';
+    }
+
+    // گالری تصاویر - فقط وقتی حداقل یک عکس در پنل مدیریت ثبت شده باشد نمایش داده می‌شود
+    if (Array.isArray(c.gallery) && c.gallery.length > 0) {
+      const grid = document.getElementById('galleryGrid');
+      const section = document.getElementById('gallery-section');
+      grid.innerHTML = '';
+      c.gallery.forEach(g => {
+        if (!g || !g.url) return;
+        const fig = document.createElement('figure');
+        fig.style.cssText = 'margin:0; border-radius:14px; overflow:hidden; background:#000;';
+        fig.innerHTML = `
+          <img src="${escapeAttr(g.url)}" alt="${escapeAttr(g.caption || 'تصویر کلینیک')}" style="width:100%; height:220px; object-fit:cover; display:block;">
+          ${g.caption ? `<figcaption style="padding:8px 10px; font-size:12.5px; color:#57655f; background:#fff;">${escapeHtml(g.caption)}</figcaption>` : ''}
+        `;
+        grid.appendChild(fig);
       });
       if (grid.children.length > 0) section.style.display = 'block';
     }
