@@ -116,6 +116,33 @@
           <input id="telegram" />
         </div>
       </div>
+      <div class="row2">
+        <div>
+          <label>لینک واتساپ (مثلاً https://wa.me/989xxxxxxxxx)</label>
+          <input id="whatsapp" />
+        </div>
+        <div>
+          <label>لینک بله (Bale)</label>
+          <input id="bale" />
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>هدر سایت (منوی بالا)</h3>
+      <label>نام کلینیک (متن درشت کنار لوگو)</label>
+      <input id="clinicName" />
+      <label>زیرنویس کوچک کنار لوگو (نام دکتر و شهر)</label>
+      <input id="doctorLine" />
+      <p style="font-size:12.5px; color:#6b7a76; margin:14px 0 8px;">متن هر کدام از لینک‌های منوی بالای سایت را از اینجا تغییر دهید.</p>
+      <div class="row2">
+        <div><label>لینک اول (درباره دکتر)</label><input id="navAbout" /></div>
+        <div><label>لینک دوم (خدمات)</label><input id="navServices" /></div>
+      </div>
+      <div class="row2">
+        <div><label>لینک سوم (بازگشت به تمرین)</label><input id="navProcess" /></div>
+        <div><label>لینک چهارم (تماس و آدرس)</label><input id="navContact" /></div>
+      </div>
     </div>
 
     <div class="card">
@@ -223,6 +250,32 @@
       <button type="button" onclick="addVideo()" style="background:var(--field); color:#fff; border:none; padding:10px 18px; border-radius:8px; font-family:inherit; font-size:13px; cursor:pointer; margin-top:6px;">+ افزودن ویدیوی جدید</button>
     </div>
 
+    <div class="card" id="teamCard">
+      <h3>پرسنل کلینیک</h3>
+      <label>عنوان کوچک بالای بخش (Eyebrow)</label>
+      <input id="teamEyebrow" />
+      <label>عنوان اصلی بخش پرسنل</label>
+      <input id="teamHeading" />
+      <label>توضیح زیر عنوان</label>
+      <textarea id="teamSubheading"></textarea>
+      <p style="font-size:12.5px; color:#6b7a76; margin:14px 0;">برای هر عضو تیم، نام، سمت، توضیح کوتاه درباره خدماتی که ارائه می‌دهد و یک عکس اضافه کنید. تا وقتی حداقل یک نفر ثبت نشده، این بخش روی سایت نمایش داده نمی‌شود.</p>
+      <div id="teamList"></div>
+      <button type="button" onclick="addTeamMember()" style="background:var(--field); color:#fff; border:none; padding:10px 18px; border-radius:8px; font-family:inherit; font-size:13px; cursor:pointer; margin-top:6px;">+ افزودن عضو جدید</button>
+    </div>
+
+    <div class="card" id="galleryCard">
+      <h3>گالری تصاویر کلینیک</h3>
+      <label>عنوان کوچک بالای بخش (Eyebrow)</label>
+      <input id="galleryEyebrow" />
+      <label>عنوان اصلی بخش گالری</label>
+      <input id="galleryHeading" />
+      <label>توضیح زیر عنوان</label>
+      <textarea id="gallerySubheading"></textarea>
+      <p style="font-size:12.5px; color:#6b7a76; margin:14px 0;">هر تعداد عکس که بخواهید از فضای کلینیک اضافه کنید. تا وقتی حداقل یک عکس ثبت نشده، این بخش روی سایت نمایش داده نمی‌شود.</p>
+      <div id="galleryList"></div>
+      <button type="button" onclick="addGalleryItem()" style="background:var(--field); color:#fff; border:none; padding:10px 18px; border-radius:8px; font-family:inherit; font-size:13px; cursor:pointer; margin-top:6px;">+ افزودن عکس جدید</button>
+    </div>
+
     <div class="card">
       <h3>مقالات و آموزش</h3>
       <p style="font-size:12.5px; color:#6b7a76; margin-bottom:14px;">هر مقاله یک عنوان، خلاصه و لینک (اختیاری) به متن کامل دارد. تا وقتی حداقل یک مقاله با عنوان ثبت نشده، این بخش روی سایت نمایش داده نمی‌شود.</p>
@@ -311,7 +364,10 @@ async function loadContent() {
     'aboutText1','aboutText2',
     'testimonialText','testimonialName','testimonialRole','mapQuery',
     'servicesEyebrow','servicesHeading','servicesSubheading',
-    'videosEyebrow','videosHeading','videosSubheading'
+    'videosEyebrow','videosHeading','videosSubheading',
+    'clinicName','doctorLine','whatsapp','bale','navAbout','navServices','navProcess','navContact',
+    'teamEyebrow','teamHeading','teamSubheading',
+    'galleryEyebrow','galleryHeading','gallerySubheading'
   ];
   simpleFields.forEach(key => {
     const el = document.getElementById(key);
@@ -329,6 +385,12 @@ async function loadContent() {
 
   // ویدیوها
   renderVideos(currentContent.videos || []);
+
+  // پرسنل
+  renderTeam(currentContent.team || []);
+
+  // گالری تصاویر
+  renderGallery(currentContent.gallery || []);
 
   // مقالات
   renderArticles(currentContent.articles || []);
@@ -412,6 +474,100 @@ async function uploadLogo() {
   }
 }
 
+// آپلود عمومی عکس برای یک ردیف پویا (پرسنل یا گالری) - نتیجه را داخل فیلد متنی مقصد می‌گذارد
+async function uploadImageForRow(fileInputId, targetInputId, previewId, statusId) {
+  const input = document.getElementById(fileInputId);
+  const status = document.getElementById(statusId);
+  if (!input.files || !input.files[0]) { status.textContent = 'اول یک فایل انتخاب کنید.'; status.className = 'status bad'; return; }
+  status.textContent = 'در حال آپلود...'; status.className = 'status';
+  const formData = new FormData();
+  formData.append('image', input.files[0]);
+  try {
+    const r = await fetch('/api/upload', { method: 'POST', body: formData });
+    const d = await r.json();
+    if (r.ok) {
+      document.getElementById(targetInputId).value = d.url;
+      const preview = document.getElementById(previewId);
+      if (preview) preview.innerHTML = `<img src="${escapeAttr(d.url)}" style="width:56px;height:56px;border-radius:10px;object-fit:cover;border:1px solid var(--line);">`;
+      status.textContent = '✓ آپلود شد.';
+      status.className = 'status ok';
+    } else {
+      status.textContent = d.error || 'خطا در آپلود'; status.className = 'status bad';
+    }
+  } catch (e) {
+    status.textContent = 'خطا در ارتباط با سرور'; status.className = 'status bad';
+  }
+}
+
+let teamCount = 0;
+function renderTeam(team) {
+  const list = document.getElementById('teamList');
+  list.innerHTML = '';
+  teamCount = 0;
+  team.forEach(p => addTeamMember(p));
+  if (team.length === 0) addTeamMember();
+}
+
+function addTeamMember(data) {
+  const i = teamCount++;
+  const list = document.getElementById('teamList');
+  const box = document.createElement('div');
+  box.id = 'teamBox' + i;
+  box.style.cssText = 'border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; position:relative;';
+  const photoUrl = (data && data.photo) || '';
+  box.innerHTML = `
+    <div class="svc-title">عضو ${i + 1}</div>
+    <label>نام</label>
+    <input id="teamName${i}" value="${escapeHtml(data && data.name || '')}">
+    <label>سمت / تخصص</label>
+    <input id="teamRole${i}" value="${escapeHtml(data && data.role || '')}">
+    <label>توضیح کوتاه درباره خدماتی که ارائه می‌دهد</label>
+    <textarea id="teamDesc${i}">${escapeHtml(data && data.desc || '')}</textarea>
+    <label>عکس پرسنل</label>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+      <div id="teamPhotoPreview${i}">${photoUrl ? `<img src="${escapeAttr(photoUrl)}" style="width:56px;height:56px;border-radius:10px;object-fit:cover;border:1px solid var(--line);">` : ''}</div>
+      <input type="file" id="teamPhotoFile${i}" accept="image/*" style="flex:1;">
+      <button type="button" onclick="uploadImageForRow('teamPhotoFile${i}','teamPhoto${i}','teamPhotoPreview${i}','teamPhotoStatus${i}')" style="background:var(--field); color:#fff; border:none; padding:8px 14px; border-radius:8px; font-family:inherit; font-size:12.5px; cursor:pointer;">آپلود</button>
+    </div>
+    <input type="hidden" id="teamPhoto${i}" value="${escapeAttr(photoUrl)}">
+    <span class="status" id="teamPhotoStatus${i}"></span>
+    <button type="button" onclick="document.getElementById('teamBox${i}').remove()" style="display:block; background:transparent; color:var(--pulse); border:1px solid var(--pulse); padding:6px 14px; border-radius:8px; font-family:inherit; font-size:12px; cursor:pointer; margin-top:10px;">حذف این عضو</button>
+  `;
+  list.appendChild(box);
+}
+
+let galleryCount = 0;
+function renderGallery(gallery) {
+  const list = document.getElementById('galleryList');
+  list.innerHTML = '';
+  galleryCount = 0;
+  gallery.forEach(g => addGalleryItem(g));
+  if (gallery.length === 0) addGalleryItem();
+}
+
+function addGalleryItem(data) {
+  const i = galleryCount++;
+  const list = document.getElementById('galleryList');
+  const box = document.createElement('div');
+  box.id = 'galleryBox' + i;
+  box.style.cssText = 'border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; position:relative;';
+  const photoUrl = (data && data.url) || '';
+  box.innerHTML = `
+    <div class="svc-title">عکس ${i + 1}</div>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+      <div id="galleryPreview${i}">${photoUrl ? `<img src="${escapeAttr(photoUrl)}" style="width:56px;height:56px;border-radius:10px;object-fit:cover;border:1px solid var(--line);">` : ''}</div>
+      <input type="file" id="galleryFile${i}" accept="image/*" style="flex:1;">
+      <button type="button" onclick="uploadImageForRow('galleryFile${i}','galleryUrl${i}','galleryPreview${i}','galleryStatus${i}')" style="background:var(--field); color:#fff; border:none; padding:8px 14px; border-radius:8px; font-family:inherit; font-size:12.5px; cursor:pointer;">آپلود</button>
+    </div>
+    <input type="hidden" id="galleryUrl${i}" value="${escapeAttr(photoUrl)}">
+    <span class="status" id="galleryStatus${i}"></span>
+    <label>توضیح کوتاه زیر عکس (اختیاری)</label>
+    <input id="galleryCaption${i}" value="${escapeHtml(data && data.caption || '')}">
+    <button type="button" onclick="document.getElementById('galleryBox${i}').remove()" style="display:block; background:transparent; color:var(--pulse); border:1px solid var(--pulse); padding:6px 14px; border-radius:8px; font-family:inherit; font-size:12px; cursor:pointer; margin-top:10px;">حذف این عکس</button>
+  `;
+  list.appendChild(box);
+}
+
 let articleCount = 0;
 function renderArticles(articles) {
   const list = document.getElementById('articlesList');
@@ -462,7 +618,10 @@ async function saveContent() {
     'aboutText1','aboutText2',
     'testimonialText','testimonialName','testimonialRole','mapQuery',
     'servicesEyebrow','servicesHeading','servicesSubheading',
-    'videosEyebrow','videosHeading','videosSubheading'
+    'videosEyebrow','videosHeading','videosSubheading',
+    'clinicName','doctorLine','whatsapp','bale','navAbout','navServices','navProcess','navContact',
+    'teamEyebrow','teamHeading','teamSubheading',
+    'galleryEyebrow','galleryHeading','gallerySubheading'
   ];
   simpleFields.forEach(key => {
     const el = document.getElementById(key);
@@ -491,6 +650,30 @@ async function saveContent() {
     videos.push({ title: title, desc: desc, url: url });
   }
   currentContent.videos = videos;
+
+  const team = [];
+  for (let i = 0; i < teamCount; i++) {
+    const nameEl = document.getElementById('teamName' + i);
+    if (!nameEl) continue; // این عضو حذف شده بود
+    const name = nameEl.value.trim();
+    const role = document.getElementById('teamRole' + i).value.trim();
+    const desc = document.getElementById('teamDesc' + i).value.trim();
+    const photo = document.getElementById('teamPhoto' + i).value.trim();
+    if (!name && !role && !desc && !photo) continue; // ردیف کاملاً خالی را ذخیره نکن
+    team.push({ name: name, role: role, desc: desc, photo: photo });
+  }
+  currentContent.team = team;
+
+  const gallery = [];
+  for (let i = 0; i < galleryCount; i++) {
+    const urlEl = document.getElementById('galleryUrl' + i);
+    if (!urlEl) continue; // این عکس حذف شده بود
+    const url = urlEl.value.trim();
+    const caption = document.getElementById('galleryCaption' + i).value.trim();
+    if (!url && !caption) continue; // ردیف کاملاً خالی را ذخیره نکن
+    gallery.push({ url: url, caption: caption });
+  }
+  currentContent.gallery = gallery;
 
   // مقالات - از تمام ردیف‌های باقی‌مانده در صفحه (بعضی ممکن است حذف شده باشند) جمع‌آوری می‌شود
   const articles = [];
